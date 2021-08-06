@@ -58,9 +58,9 @@ I                 I  I     I     I           I
 
 			_sut = new Amazing(new Random(0));
 
-			_sut.DoIt(15, 20);
+			var actual = _sut.DoIt(15, 20);
 
-			Assert.AreEqual(expected, _sut.Result, "Should have the maze that was expected");
+			Assert.AreEqual(expected, actual, "Should have the maze that was expected");
 		}
 
 		[Test]
@@ -81,9 +81,9 @@ I        I  I
 ";
 
 			_sut = new Amazing(new Random(100));
-			_sut.DoIt(4, 5);
+			var actual = _sut.DoIt(4, 5);
 
-			Assert.AreEqual(expected, _sut.Result, "Should have the maze that was expected");
+			Assert.AreEqual(expected, actual, "Should have the maze that was expected");
 		}
 	}
 }

@@ -4,8 +4,9 @@ public class Amazing
 {
 	private readonly Random _random;
 
+	private string Result = string.Empty;
+
 	static int Target = 0;      // where GOTO goes
-	public string Result = "";
 
     public Amazing(Random random)
     {
@@ -37,7 +38,7 @@ public class Amazing
 		Target = lineno;
 	}
 
-	public void DoIt(int horizontal, int vertical) 
+	public string DoIt(int horizontal, int vertical) 
 	{
 		Clear();
 		Print("Amazing - Copyright by Creative Computing, Morristown, NJ");
@@ -45,7 +46,11 @@ public class Amazing
 
 		int h = horizontal;
 		int v = vertical;
-		if (h == 1 || v == 1) return;
+
+		if (h == 1 || v == 1)
+		{
+			throw new ArgumentException("Both height and width were 1.");
+		}
 
 		int[,] wArray = new int[h + 1,v + 1];
 		
@@ -661,5 +666,7 @@ public class Amazing
 			Print(":");    // 1360
 			PrintLine();
 		}
+
+		return Result;
 	}
 }
