@@ -1,15 +1,10 @@
 using System;
+
 public class Amazing
 {
 	static int target = 0;      // where GOTO goes
 	public static Random random = new Random(0);
 	public static string result = "";
-
-	public static void Main(String[] args) 
-	{
-		doit(int.Parse(args[0]),int.Parse(args[1]));
-		System.Console.WriteLine(result);
-	}
 
 	private static void clear() 
 	{
