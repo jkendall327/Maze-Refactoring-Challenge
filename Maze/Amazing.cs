@@ -6,7 +6,7 @@ public class Amazing
 
 	private string Result = string.Empty;
 
-	static int Target = 0;      // where GOTO goes
+	private int Target = 0;      // where GOTO goes
 
     public Amazing(Random random)
     {
