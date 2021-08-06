@@ -13,17 +13,17 @@ public class Amazing
         _random = random;
     }
 
-	public void Print(String text) 
+	private void Print(String text) 
 	{
 		Result += text;
 	}
 
-	public int Rnd(int count) 
+	private int Rnd(int count) 
 	{
 		return (int) (count * _random.NextDouble()) + 1;
 	}
 
-	public void Goto(int lineno) 
+	private void Goto(int lineno) 
 	{
 		Target = lineno;
 	}
