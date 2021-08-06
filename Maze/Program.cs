@@ -6,7 +6,7 @@ public class Program
 	{
 		var amazing = new Amazing();
 
-		amazing.doit(int.Parse(args[0]), int.Parse(args[1]));
-		Console.WriteLine(amazing.result);
+		amazing.DoIt(int.Parse(args[0]), int.Parse(args[1]));
+		Console.WriteLine(amazing.Result);
 	}
 }
