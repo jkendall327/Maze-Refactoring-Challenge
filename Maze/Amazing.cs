@@ -13,16 +13,6 @@ public class Amazing
         _random = random;
     }
 
-    private void Clear() 
-	{
-		Result = "";
-	}
-
-	private void PrintLine() 
-	{
-		Result += "\r\n";
-	}
-
 	public void Print(String text) 
 	{
 		Result += text;
@@ -40,9 +30,11 @@ public class Amazing
 
 	public string DoIt(int horizontal, int vertical) 
 	{
-		Clear();
+		Result = string.Empty;
+
 		Print("Amazing - Copyright by Creative Computing, Morristown, NJ");
-		PrintLine();
+		
+		Result += Environment.NewLine;
 
 		int h = horizontal;
 		int v = vertical;
@@ -72,7 +64,7 @@ public class Amazing
 		}
 		// 180
 		Print(":");
-		PrintLine();
+		Result += Environment.NewLine;
 
 		// 190
 		int c = 1;
@@ -651,7 +643,7 @@ public class Amazing
 			}
 
 			Print(" ");   // 1280
-			PrintLine();
+			Result += Environment.NewLine;
 
 			for (int i = 1; i <= h; i++) 
 			{
@@ -664,7 +656,7 @@ public class Amazing
 			}
 
 			Print(":");    // 1360
-			PrintLine();
+			Result += Environment.NewLine;
 		}
 
 		return Result;
