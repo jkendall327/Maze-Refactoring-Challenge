@@ -4,7 +4,7 @@ public class Program
 {
 	public static void Main(string[] args)
 	{
-		var amazing = new Amazing();
+		var amazing = new Amazing(new Random());
 
 		amazing.DoIt(int.Parse(args[0]), int.Parse(args[1]));
 		Console.WriteLine(amazing.Result);

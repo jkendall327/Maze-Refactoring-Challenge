@@ -2,11 +2,17 @@ using System;
 
 public class Amazing
 {
+	private readonly Random _random;
+
 	static int Target = 0;      // where GOTO goes
-	public Random Random = new Random(0);
 	public string Result = "";
 
-	private void Clear() 
+    public Amazing(Random random)
+    {
+        _random = random;
+    }
+
+    private void Clear() 
 	{
 		Result = "";
 	}
@@ -23,7 +29,7 @@ public class Amazing
 
 	public int Rnd(int count) 
 	{
-		return (int) (count * Random.NextDouble()) + 1;
+		return (int) (count * _random.NextDouble()) + 1;
 	}
 
 	public void Goto(int lineno) 
