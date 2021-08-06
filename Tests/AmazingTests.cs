@@ -7,6 +7,8 @@ namespace Tests
 	[TestFixture]
 	public class AmazingTests
 	{
+		private Amazing _sut;
+
 		[Test]
 		public void Seed0size15x20() 
 		{
@@ -54,10 +56,12 @@ I                 I  I     I     I           I
 :--:--:--:--:--:--:--:--:--:--:--:  :--:--:--:
 ";
 
-			Amazing.random = new Random(0);
-			Amazing.doit(15, 20);
+			_sut = new Amazing();
 
-			Assert.AreEqual(expected, Amazing.result, "Should have the maze that was expected");
+			_sut.random = new Random(0);
+			_sut.doit(15, 20);
+
+			Assert.AreEqual(expected, _sut.result, "Should have the maze that was expected");
 		}
 
 		[Test]
@@ -77,10 +81,10 @@ I        I  I
 :--:--:--:  :
 ";
 
-			Amazing.random = new Random(100);
-			Amazing.doit(4, 5);
+			_sut.random = new Random(100);
+			_sut.doit(4, 5);
 
-			Assert.AreEqual(expected, Amazing.result, "Should have the maze that was expected");
+			Assert.AreEqual(expected, _sut.result, "Should have the maze that was expected");
 		}
 	}
 }

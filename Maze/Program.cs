@@ -4,7 +4,9 @@ public class Program
 {
 	public static void Main(string[] args)
 	{
-		Amazing.doit(int.Parse(args[0]), int.Parse(args[1]));
-		Console.WriteLine(Amazing.result);
+		var amazing = new Amazing();
+
+		amazing.doit(int.Parse(args[0]), int.Parse(args[1]));
+		Console.WriteLine(amazing.result);
 	}
 }

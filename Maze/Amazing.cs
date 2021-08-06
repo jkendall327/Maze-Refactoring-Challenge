@@ -3,35 +3,35 @@ using System;
 public class Amazing
 {
 	static int target = 0;      // where GOTO goes
-	public static Random random = new Random(0);
-	public static string result = "";
+	public Random random = new Random(0);
+	public string result = "";
 
-	private static void clear() 
+	private void clear() 
 	{
 		result = "";
 	}
 
-	private static void println() 
+	private void println() 
 	{
 		result += "\r\n";
 	}
 
-	public static void print(String text) 
+	public void print(String text) 
 	{
 		result += text;
 	}
 
-	public static int rnd(int count) 
+	public int rnd(int count) 
 	{
 		return (int) (count * random.NextDouble()) + 1;
 	}
 
-	public static void GOTO(int lineno) 
+	public void GOTO(int lineno) 
 	{
 		target = lineno;
 	}
 
-	public static void doit(int horizontal, int vertical) 
+	public void doit(int horizontal, int vertical) 
 	{
 		clear();
 		print("Amazing - Copyright by Creative Computing, Morristown, NJ");
