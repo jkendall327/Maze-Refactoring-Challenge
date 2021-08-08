@@ -1,4 +1,5 @@
 using System;
+using System.Text;
 
 namespace Maze
 {
@@ -6,7 +7,7 @@ namespace Maze
     {
         private readonly Random _random;
 
-        private string _result = string.Empty;
+        private StringBuilder _result = new();
         private int _target; // where GOTO goes
 
         public Amazing(Random random)
@@ -16,7 +17,7 @@ namespace Maze
 
         private void Print(string text)
         {
-            _result += text;
+            _result.Append(text);
         }
 
         private int Rnd(int count)
@@ -31,11 +32,9 @@ namespace Maze
 
         private void PrintHeader()
         {
-            _result = string.Empty;
-
             Print("Amazing - Copyright by Creative Computing, Morristown, NJ");
 
-            _result += Environment.NewLine;
+            _result.Append(Environment.NewLine);
         }
         
         public string DoIt(int horizontal, int vertical)
@@ -65,7 +64,7 @@ namespace Maze
 
             // 180
             Print(":");
-            _result += Environment.NewLine;
+            _result.Append(Environment.NewLine);
 
             // 190
             var c = 1;
@@ -81,7 +80,7 @@ namespace Maze
 
             PostWhileLoop(v, h, vArray);
 
-            return _result;
+            return _result.ToString();
         }
 
         private void DrawMaze(int r, int h, int s, int v, int[,] wArray, int x, int z, int q, int c, int[,] vArray)
@@ -588,7 +587,7 @@ namespace Maze
                 }
 
                 Print(" "); // 1280
-                _result += Environment.NewLine;
+                _result.Append(Environment.NewLine);
 
                 for (var i = 1; i <= h; i++)
                 {
@@ -606,7 +605,7 @@ namespace Maze
                 }
 
                 Print(":"); // 1360
-                _result += Environment.NewLine;
+                _result.Append(Environment.NewLine);
             }
         }
     }
