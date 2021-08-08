@@ -1,5 +1,6 @@
 using System;
 using System.IO;
+using Maze;
 using NUnit.Framework;
 
 namespace Tests

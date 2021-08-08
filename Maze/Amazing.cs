@@ -1,664 +1,588 @@
 using System;
 
-public class Amazing
+namespace Maze
 {
-	private readonly Random _random;
-
-	private string Result = string.Empty;
-
-	private int Target = 0;      // where GOTO goes
-
-    public Amazing(Random random)
+    public class Amazing
     {
-        _random = random;
+        private readonly Random _random;
+
+        private string _result = string.Empty;
+        private int _target; // where GOTO goes
+
+        public Amazing(Random random)
+        {
+            _random = random;
+        }
+
+        private void Print(string text)
+        {
+            _result += text;
+        }
+
+        private int Rnd(int count)
+        {
+            return (int) (count * _random.NextDouble()) + 1;
+        }
+
+        private void Goto(int lineno)
+        {
+            _target = lineno;
+        }
+
+        public string DoIt(int horizontal, int vertical)
+        {
+            _result = string.Empty;
+
+            Print("Amazing - Copyright by Creative Computing, Morristown, NJ");
+
+            _result += Environment.NewLine;
+
+            var h = horizontal;
+            var v = vertical;
+
+            if (h == 1 || v == 1)
+            {
+                throw new ArgumentException("Both height and width were 1.");
+            }
+
+            int[,] wArray = new int[h + 1, v + 1];
+            int[,] vArray = new int[h + 1, v + 1];
+
+            var q = 0;
+            var z = 0;
+            var x = Rnd(h);
+
+            // 130:170
+            for (var i = 1; i <= h; i++)
+            {
+                Print(i == x ? ":  " : ":--");
+            }
+
+            // 180
+            Print(":");
+            _result += Environment.NewLine;
+
+            // 190
+            var c = 1;
+            wArray[x, 1] = c;
+            c++;
+
+            // 200
+            var r = x;
+            var s = 1;
+            Goto(270);
+
+            while (_target != -1)
+            {
+                switch (_target)
+                {
+                    case 210:
+                        Goto(r != h ? 250 : 220);
+                        continue;
+                    case 220:
+                        Goto(s != v ? 240 : 230);
+                        continue;
+                    case 230:
+                        r = 1;
+                        s = 1;
+                        Goto(260);
+                        continue;
+                    case 240:
+                        r = 1;
+                        s++;
+                        Goto(260);
+                        continue;
+                    case 250:
+                        r++;
+                        Goto(260);
+                        continue;
+                    case 260:
+                        Goto(wArray[r, s] == 0 ? 210 : 270);
+                        continue;
+                    case 270:
+                        Goto(r - 1 == 0 ? 600 : 280);
+                        continue;
+                    case 280:
+                        Goto(wArray[r - 1, s] != 0 ? 600 : 290);
+                        continue;
+                    case 290:
+                        Goto(s - 1 == 0 ? 430 : 300);
+                        continue;
+                    case 300:
+                        Goto(wArray[r, s - 1] != 0 ? 430 : 310);
+                        continue;
+                    case 310:
+                        Goto(r == h ? 350 : 320);
+                        continue;
+                    case 320:
+                        Goto(wArray[r + 1, s] != 0 ? 350 : 330);
+                        continue;
+                    case 330:
+                        x = Rnd(3);
+                        Goto(340);
+                        continue;
+                    case 340:
+                        switch (x)
+                        {
+                            case 1:
+                                Goto(940);
+                                break;
+                            case 2:
+                                Goto(980);
+                                break;
+                            case 3:
+                                Goto(1020);
+                                break;
+                            default:
+                                Goto(350);
+                                break;
+                        }
+                        continue;
+                    case 350:
+                        Goto(s != v ? 380 : 360);
+                        continue;
+                    case 360:
+                        Goto(z == 1 ? 410 : 370);
+                        continue;
+                    case 370:
+                        q = 1;
+                        Goto(390);
+                        continue;
+                    case 380:
+                        Goto(wArray[r, s + 1] != 0 ? 410 : 390);
+                        continue;
+                    case 390:
+                        x = Rnd(3);
+                        Goto(400);
+                        continue;
+                    case 400:
+                        switch (x)
+                        {
+                            case 1:
+                                Goto(940);
+                                break;
+                            case 2:
+                                Goto(980);
+                                break;
+                            case 3:
+                                Goto(1090);
+                                break;
+                            default:
+                                Goto(410);
+                                break;
+                        }
+                        continue;
+                    case 410:
+                        x = Rnd(2);
+                        Goto(420);
+                        continue;
+                    case 420:
+                        switch (x)
+                        {
+                            case 1:
+                                Goto(940);
+                                break;
+                            case 2:
+                                Goto(980);
+                                break;
+                            default:
+                                Goto(430);
+                                break;
+                        }
+                        continue;
+                    case 430:
+                        Goto(r == h ? 530 : 440);
+                        continue;
+                    case 440:
+                        Goto(wArray[r + 1, s] != 0 ? 530 : 450);
+                        continue;
+                    case 450:
+                        Goto(s != v ? 480 : 460);
+                        continue;
+                    case 460:
+                        Goto(z == 1 ? 510 : 470);
+                        continue;
+                    case 470:
+                        q = 1;
+                        Goto(490);
+                        continue;
+                    case 480:
+                        Goto(wArray[r, s + 1] != 0 ? 510 : 490);
+                        continue;
+                    case 490:
+                        x = Rnd(3);
+                        Goto(500);
+                        continue;
+                    case 500:
+                        switch (x)
+                        {
+                            case 1:
+                                Goto(940);
+                                break;
+                            case 2:
+                                Goto(1020);
+                                break;
+                            case 3:
+                                Goto(1090);
+                                break;
+                            default:
+                                Goto(510);
+                                break;
+                        }
+                        continue;
+                    case 510:
+                        x = Rnd(2);
+                        Goto(520);
+                        continue;
+                    case 520:
+                        switch (x)
+                        {
+                            case 1:
+                                Goto(940);
+                                break;
+                            case 2:
+                                Goto(1020);
+                                break;
+                            default:
+                                Goto(530);
+                                break;
+                        }
+                        continue;
+                    case 530:
+                        Goto(s != v ? 560 : 540);
+                        continue;
+                    case 540:
+                        Goto(z == 1 ? 590 : 550);
+                        continue;
+                    case 550:
+                        q = 1;
+                        Goto(570);
+                        continue;
+                    case 560:
+                        Goto(wArray[r, s + 1] != 0 ? 590 : 570);
+                        continue;
+                    case 570:
+                        x = Rnd(2);
+                        Goto(580);
+                        continue;
+                    case 580:
+                        switch (x)
+                        {
+                            case 1:
+                                Goto(940);
+                                break;
+                            case 2:
+                                Goto(1090);
+                                break;
+                            default:
+                                Goto(590);
+                                break;
+                        }
+                        continue;
+                    case 590:
+                        Goto(940);
+                        continue;
+                    case 600:
+                        Goto(s - 1 == 0 ? 790 : 610);
+                        continue;
+                    case 610:
+                        Goto(wArray[r, s - 1] != 0 ? 790 : 620);
+                        continue;
+                    case 620:
+                        Goto(r == h ? 720 : 630);
+                        continue;
+                    case 630:
+                        Goto(wArray[r + 1, s] != 0 ? 720 : 640);
+                        continue;
+                    case 640:
+                        Goto(s != v ? 670 : 650);
+                        continue;
+                    case 650:
+                        Goto(z == 1 ? 700 : 660);
+                        continue;
+                    case 660:
+                        q = 1;
+                        Goto(680);
+                        continue;
+                    case 670:
+                        Goto(wArray[r, s + 1] != 0 ? 700 : 680);
+                        continue;
+                    case 680:
+                        x = Rnd(3);
+                        Goto(690);
+                        continue;
+                    case 690:
+                        switch (x)
+                        {
+                            case 1:
+                                Goto(980);
+                                break;
+                            case 2:
+                                Goto(1020);
+                                break;
+                            case 3:
+                                Goto(1090);
+                                break;
+                            default:
+                                Goto(700);
+                                break;
+                        }
+                        continue;
+                    case 700:
+                        x = Rnd(2);
+                        Goto(710);
+                        continue;
+                    case 710:
+                        switch (x)
+                        {
+                            case 1:
+                                Goto(980);
+                                break;
+                            case 2:
+                                Goto(1020);
+                                break;
+                            default:
+                                Goto(720);
+                                break;
+                        }
+                        continue;
+                    case 720:
+                        Goto(s != v ? 750 : 730);
+                        continue;
+                    case 730:
+                        Goto(z == 1 ? 780 : 740);
+                        continue;
+                    case 740:
+                        q = 1;
+                        Goto(760);
+                        continue;
+                    case 750:
+                        Goto(wArray[r, s + 1] != 0 ? 780 : 760);
+                        continue;
+                    case 760:
+                        x = Rnd(2);
+                        Goto(770);
+                        continue;
+                    case 770:
+                        switch (x)
+                        {
+                            case 1:
+                                Goto(980);
+                                break;
+                            case 2:
+                                Goto(1090);
+                                break;
+                            default:
+                                Goto(780);
+                                break;
+                        }
+                        continue;
+                    case 780:
+                        Goto(980);
+                        continue;
+                    case 790:
+                        Goto(r == h ? 880 : 800);
+                        continue;
+                    case 800:
+                        Goto(wArray[r + 1, s] != 0 ? 880 : 810);
+                        continue;
+                    case 810:
+                        Goto(s != v ? 840 : 820);
+                        continue;
+                    case 820:
+                        Goto(z == 1 ? 870 : 830);
+                        continue;
+                    case 830:
+                        q = 1;
+                        Goto(990);
+                        continue;
+                    case 840:
+                        Goto(wArray[r, s + 1] != 0 ? 870 : 850);
+                        continue;
+                    case 850:
+                        x = Rnd(2);
+                        Goto(860);
+                        continue;
+                    case 860:
+                        switch (x)
+                        {
+                            case 1:
+                                Goto(1020);
+                                break;
+                            case 2:
+                                Goto(1090);
+                                break;
+                            default:
+                                Goto(870);
+                                break;
+                        }
+                        continue;
+                    case 870:
+                        Goto(1020);
+                        continue;
+                    case 880:
+                        Goto(s != v ? 910 : 890);
+                        continue;
+                    case 890:
+                        Goto(z == 1 ? 930 : 900);
+                        continue;
+                    case 900:
+                        q = 1;
+                        Goto(920);
+                        continue;
+                    case 910:
+                        Goto(wArray[r, s + 1] != 0 ? 930 : 920);
+                        continue;
+                    case 920:
+                        Goto(1090);
+                        continue;
+                    case 930:
+                        Goto(1190);
+                        continue;
+                    case 940:
+                        wArray[r - 1, s] = c;
+                        Goto(950);
+                        continue;
+                    case 950:
+                        c++;
+                        vArray[r - 1, s] = 2;
+                        r--;
+                        Goto(960);
+                        continue;
+                    case 960:
+                        Goto(c == h * v + 1 ? 1200 : 970);
+                        continue;
+                    case 970:
+                        q = 0;
+                        Goto(270);
+                        continue;
+                    case 980:
+                        wArray[r, s - 1] = c;
+                        Goto(990);
+                        continue;
+                    case 990:
+                        c++;
+                        Goto(1000);
+                        continue;
+                    case 1000:
+                        vArray[r, s - 1] = 1;
+                        s--;
+                        Goto(c == h * v + 1 ? 1200 : 1010);
+                        continue;
+                    case 1010:
+                        q = 0;
+                        Goto(270);
+                        continue;
+                    case 1020:
+                        wArray[r + 1, s] = c;
+                        Goto(1030);
+                        continue;
+                    case 1030:
+                        c++;
+                        Goto(vArray[r, s] == 0 ? 1050 : 1040);
+                        continue;
+                    case 1040:
+                        vArray[r, s] = 3;
+                        Goto(1060);
+                        continue;
+                    case 1050:
+                        vArray[r, s] = 2;
+                        Goto(1060);
+                        continue;
+                    case 1060:
+                        r++;
+                        Goto(1070);
+                        continue;
+                    case 1070:
+                        Goto(c == h * v + 1 ? 1200 : 1080);
+                        continue;
+                    case 1080:
+                        Goto(600);
+                        continue;
+                    case 1090:
+                        Goto(q == 1 ? 1150 : 1100);
+                        continue;
+                    case 1100:
+                        wArray[r, s + 1] = c;
+                        c++;
+                        Goto(vArray[r, s] == 0 ? 1120 : 1110);
+                        continue;
+                    case 1110:
+                        vArray[r, s] = 3;
+                        Goto(1130);
+                        continue;
+                    case 1120:
+                        vArray[r, s] = 1;
+                        Goto(1130);
+                        continue;
+                    case 1130:
+                        s++;
+                        Goto(c == v * h + 1 ? 1200 : 1140);
+                        continue;
+                    case 1140:
+                        Goto(270);
+                        continue;
+                    case 1150:
+                        z = 1;
+                        Goto(1160);
+                        continue;
+                    case 1160:
+                        Goto(vArray[r, s] == 0 ? 1180 : 1170);
+                        continue;
+                    case 1170:
+                        vArray[r, s] = 3;
+                        q = 0;
+                        Goto(1190);
+                        continue;
+                    case 1180:
+                        vArray[r, s] = 1;
+                        q = 0;
+                        r = 1;
+                        s = 1;
+                        Goto(260);
+                        continue;
+                    case 1190:
+                        Goto(210);
+                        continue;
+                    case 1200:
+                        _target = -1;
+                        continue;
+                }
+            }
+
+            // 1200:
+            for (var j = 1; j <= v; j++)
+            {
+                Print("I"); // 1210
+
+                for (var i = 1; i <= h; i++)
+                {
+                    Print(vArray[i, j] >= 2 ? "   " : "  I");
+                }
+
+                Print(" "); // 1280
+                _result += Environment.NewLine;
+
+                for (var i = 1; i <= h; i++)
+                {
+                    switch (vArray[i, j])
+                    {
+                        case 0:
+                        // 1310, 1340
+                        case 2:
+                            Print(":--"); // 1300, 1340
+                            break;
+                        default:
+                            Print(":  "); // 1320
+                            break;
+                    }
+                }
+
+                Print(":"); // 1360
+                _result += Environment.NewLine;
+            }
+
+            return _result;
+        }
     }
-
-	private void Print(String text) 
-	{
-		Result += text;
-	}
-
-	private int Rnd(int count) 
-	{
-		return (int) (count * _random.NextDouble()) + 1;
-	}
-
-	private void Goto(int lineno) 
-	{
-		Target = lineno;
-	}
-
-	public string DoIt(int horizontal, int vertical) 
-	{
-		Result = string.Empty;
-
-		Print("Amazing - Copyright by Creative Computing, Morristown, NJ");
-		
-		Result += Environment.NewLine;
-
-		int h = horizontal;
-		int v = vertical;
-
-		if (h == 1 || v == 1)
-		{
-			throw new ArgumentException("Both height and width were 1.");
-		}
-
-		int[,] wArray = new int[h + 1,v + 1];
-		
-
-		int[,] vArray = new int[h + 1,v + 1];
-		
-
-		int q = 0;
-		int z = 0;
-		int x = Rnd(h);
-
-		// 130:170
-		for (int i = 1; i <= h; i++) 
-		{
-			if (i == x)
-				Print(":  ");
-			else
-				Print(":--");
-		}
-		// 180
-		Print(":");
-		Result += Environment.NewLine;
-
-		// 190
-		int c = 1;
-		wArray[x,1] = c;
-		c++;
-
-		// 200
-		int r = x;
-		int s = 1;
-		Goto(270);
-
-		while (Target != -1) 
-		{
-			switch (Target) 
-			{
-				case 210:
-					if (r != h)
-						Goto(250);
-					else
-						Goto(220);
-					continue;
-				case 220:
-					if (s != v)
-						Goto(240);
-					else
-						Goto(230);
-					continue;
-				case 230:
-					r = 1;
-					s = 1;
-					Goto(260);
-					continue;
-				case 240:
-					r = 1;
-					s++;
-					Goto(260);
-					continue;
-				case 250:
-					r++;
-					Goto(260);
-					continue;
-				case 260:
-					if (wArray[r,s] == 0)
-						Goto(210);
-					else
-						Goto(270);
-					continue;
-				case 270:
-					if (r - 1 == 0)
-						Goto(600);
-					else
-						Goto(280);
-					continue;
-				case 280:
-					if (wArray[r - 1,s] != 0)
-						Goto(600);
-					else
-						Goto(290);
-					continue;
-				case 290:
-					if (s - 1 == 0)
-						Goto(430);
-					else
-						Goto(300);
-					continue;
-				case 300:
-					if (wArray[r,s - 1] != 0)
-						Goto(430);
-					else
-						Goto(310);
-					continue;
-				case 310:
-					if (r == h)
-						Goto(350);
-					else
-						Goto(320);
-					continue;
-				case 320:
-					if (wArray[r + 1,s] != 0)
-						Goto(350);
-					else
-						Goto(330);
-					continue;
-				case 330:
-					x = Rnd(3);
-					Goto(340);
-					continue;
-				case 340:
-					if (x == 1)
-						Goto(940);
-					else if (x == 2)
-						Goto(980);
-					else if (x == 3)
-						Goto(1020);
-					else
-						Goto(350);
-					continue;
-				case 350:
-					if (s != v)
-						Goto(380);
-					else
-						Goto(360);
-					continue;
-				case 360:
-					if (z == 1)
-						Goto(410);
-					else
-						Goto(370);
-					continue;
-				case 370:
-					q = 1;
-					Goto(390);
-					continue;
-				case 380:
-					if (wArray[r,s + 1] != 0)
-						Goto(410);
-					else
-						Goto(390);
-					continue;
-				case 390:
-					x = Rnd(3);
-					Goto(400);
-					continue;
-				case 400:
-					if (x == 1)
-						Goto(940);
-					else if (x == 2)
-						Goto(980);
-					else if (x == 3)
-						Goto(1090);
-					else
-						Goto(410);
-					continue;
-				case 410:
-					x = Rnd(2);
-					Goto(420);
-					continue;
-				case 420:
-					if (x == 1)
-						Goto(940);
-					else if (x == 2)
-						Goto(980);
-					else
-						Goto(430);
-					continue;
-				case 430:
-					if (r == h)
-						Goto(530);
-					else
-						Goto(440);
-					continue;
-				case 440:
-					if (wArray[r + 1,s] != 0)
-						Goto(530);
-					else
-						Goto(450);
-					continue;
-				case 450:
-					if (s != v)
-						Goto(480);
-					else
-						Goto(460);
-					continue;
-				case 460:
-					if (z == 1)
-						Goto(510);
-					else
-						Goto(470);
-					continue;
-				case 470:
-					q = 1;
-					Goto(490);
-					continue;
-				case 480:
-					if (wArray[r,s + 1] != 0)
-						Goto(510);
-					else
-						Goto(490);
-					continue;
-				case 490:
-					x = Rnd(3);
-					Goto(500);
-					continue;
-				case 500:
-					if (x == 1)
-						Goto(940);
-					else if (x == 2)
-						Goto(1020);
-					else if (x == 3)
-						Goto(1090);
-					else
-						Goto(510);
-					continue;
-				case 510:
-					x = Rnd(2);
-					Goto(520);
-					continue;
-				case 520:
-					if (x == 1)
-						Goto(940);
-					else if (x == 2)
-						Goto(1020);
-					else
-						Goto(530);
-					continue;
-				case 530:
-					if (s != v)
-						Goto(560);
-					else
-						Goto(540);
-					continue;
-				case 540:
-					if (z == 1)
-						Goto(590);
-					else
-						Goto(550);
-					continue;
-				case 550:
-					q = 1;
-					Goto(570);
-					continue;
-				case 560:
-					if (wArray[r,s + 1] != 0)
-						Goto(590);
-					else
-						Goto(570);
-					continue;
-				case 570:
-					x = Rnd(2);
-					Goto(580);
-					continue;
-				case 580:
-					if (x == 1)
-						Goto(940);
-					else if (x == 2)
-						Goto(1090);
-					else
-						Goto(590);
-					continue;
-				case 590:
-					Goto(940);
-					continue;
-				case 600:
-					if (s - 1 == 0)
-						Goto(790);
-					else
-						Goto(610);
-					continue;
-				case 610:
-					if (wArray[r,s - 1] != 0)
-						Goto(790);
-					else
-						Goto(620);
-					continue;
-				case 620:
-					if (r == h)
-						Goto(720);
-					else
-						Goto(630);
-					continue;
-				case 630:
-					if (wArray[r + 1,s] != 0)
-						Goto(720);
-					else
-						Goto(640);
-					continue;
-				case 640:
-					if (s != v)
-						Goto(670);
-					else
-						Goto(650);
-					continue;
-				case 650:
-					if (z == 1)
-						Goto(700);
-					else
-						Goto(660);
-					continue;
-				case 660:
-					q = 1;
-					Goto(680);
-					continue;
-				case 670:
-					if (wArray[r,s + 1] != 0)
-						Goto(700);
-					else
-						Goto(680);
-					continue;
-				case 680:
-					x = Rnd(3);
-					Goto(690);
-					continue;
-				case 690:
-					if (x == 1)
-						Goto(980);
-					else if (x == 2)
-						Goto(1020);
-					else if (x == 3)
-						Goto(1090);
-					else
-						Goto(700);
-					continue;
-				case 700:
-					x = Rnd(2);
-					Goto(710);
-					continue;
-				case 710:
-					if (x == 1)
-						Goto(980);
-					else if (x == 2)
-						Goto(1020);
-					else
-						Goto(720);
-					continue;
-				case 720:
-					if (s != v)
-						Goto(750);
-					else
-						Goto(730);
-					continue;
-				case 730:
-					if (z == 1)
-						Goto(780);
-					else
-						Goto(740);
-					continue;
-				case 740:
-					q = 1;
-					Goto(760);
-					continue;
-				case 750:
-					if (wArray[r,s + 1] != 0)
-						Goto(780);
-					else
-						Goto(760);
-					continue;
-				case 760:
-					x = Rnd(2);
-					Goto(770);
-					continue;
-				case 770:
-					if (x == 1)
-						Goto(980);
-					else if (x == 2)
-						Goto(1090);
-					else
-						Goto(780);
-					continue;
-				case 780:
-					Goto(980);
-					continue;
-				case 790:
-					if (r == h)
-						Goto(880);
-					else
-						Goto(800);
-					continue;
-				case 800:
-					if (wArray[r + 1,s] != 0)
-						Goto(880);
-					else
-						Goto(810);
-					continue;
-				case 810:
-					if (s != v)
-						Goto(840);
-					else
-						Goto(820);
-					continue;
-				case 820:
-					if (z == 1)
-						Goto(870);
-					else
-						Goto(830);
-					continue;
-				case 830:
-					q = 1;
-					Goto(990);
-					continue;
-				case 840:
-					if (wArray[r,s + 1] != 0)
-						Goto(870);
-					else
-						Goto(850);
-					continue;
-				case 850:
-					x = Rnd(2);
-					Goto(860);
-					continue;
-				case 860:
-					if (x == 1)
-						Goto(1020);
-					else if (x == 2)
-						Goto(1090);
-					else
-						Goto(870);
-					continue;
-				case 870:
-					Goto(1020);
-					continue;
-				case 880:
-					if (s != v)
-						Goto(910);
-					else
-						Goto(890);
-					continue;
-				case 890:
-					if (z == 1)
-						Goto(930);
-					else
-						Goto(900);
-					continue;
-				case 900:
-					q = 1;
-					Goto(920);
-					continue;
-				case 910:
-					if (wArray[r,s + 1] != 0)
-						Goto(930);
-					else
-						Goto(920);
-					continue;
-				case 920:
-					Goto(1090);
-					continue;
-				case 930:
-					Goto(1190);
-					continue;
-				case 940:
-					wArray[r - 1,s] = c;
-					Goto(950);
-					continue;
-				case 950:
-					c++;
-					vArray[r - 1,s] = 2;
-					r--;
-					Goto(960);
-					continue;
-				case 960:
-					if (c == h * v + 1)
-						Goto(1200);
-					else
-						Goto(970);
-					continue;
-				case 970:
-					q = 0;
-					Goto(270);
-					continue;
-				case 980:
-					wArray[r,s - 1] = c;
-					Goto(990);
-					continue;
-				case 990:
-					c++;
-					Goto(1000);
-					continue;
-				case 1000:
-					vArray[r,s - 1] = 1;
-					s--;
-					if (c == h * v + 1)
-						Goto(1200);
-					else
-						Goto(1010);
-					continue;
-				case 1010:
-					q = 0;
-					Goto(270);
-					continue;
-				case 1020:
-					wArray[r + 1,s] = c;
-					Goto(1030);
-					continue;
-				case 1030:
-					c++;
-					if (vArray[r,s] == 0)
-						Goto(1050);
-					else
-						Goto(1040);
-					continue;
-				case 1040:
-					vArray[r,s] = 3;
-					Goto(1060);
-					continue;
-				case 1050:
-					vArray[r,s] = 2;
-					Goto(1060);
-					continue;
-				case 1060:
-					r++;
-					Goto(1070);
-					continue;
-				case 1070:
-					if (c == h * v + 1)
-						Goto(1200);
-					else
-						Goto(1080);
-					continue;
-				case 1080:
-					Goto(600);
-					continue;
-				case 1090:
-					if (q == 1)
-						Goto(1150);
-					else
-						Goto(1100);
-					continue;
-				case 1100:
-					wArray[r,s + 1] = c;
-					c++;
-					if (vArray[r,s] == 0)
-						Goto(1120);
-					else
-						Goto(1110);
-					continue;
-				case 1110:
-					vArray[r,s] = 3;
-					Goto(1130);
-					continue;
-				case 1120:
-					vArray[r,s] = 1;
-					Goto(1130);
-					continue;
-				case 1130:
-					s++;
-					if (c == v * h + 1)
-						Goto(1200);
-					else
-						Goto(1140);
-					continue;
-				case 1140:
-					Goto(270);
-					continue;
-				case 1150:
-					z = 1;
-					Goto(1160);
-					continue;
-				case 1160:
-					if (vArray[r,s] == 0)
-						Goto(1180);
-					else
-						Goto(1170);
-					continue;
-				case 1170:
-					vArray[r,s] = 3;
-					q = 0;
-					Goto(1190);
-					continue;
-				case 1180:
-					vArray[r,s] = 1;
-					q = 0;
-					r = 1;
-					s = 1;
-					Goto(260);
-					continue;
-				case 1190:
-					Goto(210);
-					continue;
-				case 1200:
-					Target = -1;
-					continue;
-			}
-
-		}
-
-		// 1200:
-		for (int j = 1; j <= v; j++) 
-		{
-			Print("I");        // 1210
-
-			for (int i = 1; i <= h; i++) 
-			{
-				if (vArray[i,j] >= 2)
-					Print("   ");  // 1240
-				else
-					Print("  I");  // 1260
-			}
-
-			Print(" ");   // 1280
-			Result += Environment.NewLine;
-
-			for (int i = 1; i <= h; i++) 
-			{
-				if (vArray[i,j] == 0)
-					Print(":--");   // 1300, 1340
-				else if (vArray[i,j] == 2)
-					Print(":--");  // 1310, 1340
-				else
-					Print(":  "); // 1320
-			}
-
-			Print(":");    // 1360
-			Result += Environment.NewLine;
-		}
-
-		return Result;
-	}
 }
