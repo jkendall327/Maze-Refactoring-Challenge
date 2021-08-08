@@ -29,21 +29,26 @@ namespace Maze
             _target = lineno;
         }
 
-        public string DoIt(int horizontal, int vertical)
+        private void PrintHeader()
         {
             _result = string.Empty;
 
             Print("Amazing - Copyright by Creative Computing, Morristown, NJ");
 
             _result += Environment.NewLine;
-
-            var h = horizontal;
-            var v = vertical;
-
-            if (h == 1 || v == 1)
+        }
+        
+        public string DoIt(int horizontal, int vertical)
+        {
+            if (horizontal == 1 || vertical == 1)
             {
                 throw new ArgumentException("Both height and width were 1.");
             }
+            
+            PrintHeader();
+
+            var h = horizontal;
+            var v = vertical;
 
             int[,] wArray = new int[h + 1, v + 1];
             int[,] vArray = new int[h + 1, v + 1];
@@ -72,6 +77,15 @@ namespace Maze
             var s = 1;
             Goto(270);
 
+            DrawMaze(r, h, s, v, wArray, x, z, q, c, vArray);
+
+            PostWhileLoop(v, h, vArray);
+
+            return _result;
+        }
+
+        private void DrawMaze(int r, int h, int s, int v, int[,] wArray, int x, int z, int q, int c, int[,] vArray)
+        {
             while (_target != -1)
             {
                 switch (_target)
@@ -137,6 +151,7 @@ namespace Maze
                                 Goto(350);
                                 break;
                         }
+
                         continue;
                     case 350:
                         Goto(s != v ? 380 : 360);
@@ -171,6 +186,7 @@ namespace Maze
                                 Goto(410);
                                 break;
                         }
+
                         continue;
                     case 410:
                         x = Rnd(2);
@@ -189,6 +205,7 @@ namespace Maze
                                 Goto(430);
                                 break;
                         }
+
                         continue;
                     case 430:
                         Goto(r == h ? 530 : 440);
@@ -229,6 +246,7 @@ namespace Maze
                                 Goto(510);
                                 break;
                         }
+
                         continue;
                     case 510:
                         x = Rnd(2);
@@ -247,6 +265,7 @@ namespace Maze
                                 Goto(530);
                                 break;
                         }
+
                         continue;
                     case 530:
                         Goto(s != v ? 560 : 540);
@@ -278,6 +297,7 @@ namespace Maze
                                 Goto(590);
                                 break;
                         }
+
                         continue;
                     case 590:
                         Goto(940);
@@ -327,6 +347,7 @@ namespace Maze
                                 Goto(700);
                                 break;
                         }
+
                         continue;
                     case 700:
                         x = Rnd(2);
@@ -345,6 +366,7 @@ namespace Maze
                                 Goto(720);
                                 break;
                         }
+
                         continue;
                     case 720:
                         Goto(s != v ? 750 : 730);
@@ -376,6 +398,7 @@ namespace Maze
                                 Goto(780);
                                 break;
                         }
+
                         continue;
                     case 780:
                         Goto(980);
@@ -416,6 +439,7 @@ namespace Maze
                                 Goto(870);
                                 break;
                         }
+
                         continue;
                     case 870:
                         Goto(1020);
@@ -549,7 +573,10 @@ namespace Maze
                         continue;
                 }
             }
+        }
 
+        private void PostWhileLoop(int v, int h, int[,] vArray)
+        {
             // 1200:
             for (var j = 1; j <= v; j++)
             {
@@ -581,8 +608,6 @@ namespace Maze
                 Print(":"); // 1360
                 _result += Environment.NewLine;
             }
-
-            return _result;
         }
     }
 }
